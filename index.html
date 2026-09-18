@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="BizCalc - realistic 3D business calculators, profit tools, food cost calculators, delivery and budgeting tools.">
+<meta name="keywords" content="business calculator, burger profit calculator, food cost calculator, profit margin calculator, delivery profit calculator">
+<meta name="theme-color" content="#050b13">
+<title>BizCalc — Smart Tools for Better Business</title>
+<style>
+:root{
+ --bg:#04080f;--panel:rgba(12,21,33,.72);--line:rgba(150,200,255,.16);
+ --text:#f4f8ff;--muted:#8fa3b9;--blue:#20a9ff;--cyan:#42dcff;--green:#28d98b;
+ --shadow:0 28px 90px rgba(0,0,0,.48);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 70% 0,#0a2540 0,transparent 32%),radial-gradient(circle at 10% 40%,#06192a 0,transparent 28%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(to bottom,#000,transparent 70%)}
+a{text-decoration:none;color:inherit}.wrap{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:50;background:rgba(3,8,15,.72);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:46px;height:52px;border-radius:13px;position:relative;background:linear-gradient(145deg,#dce8f4,#4b596a 42%,#0c1420 44%,#17283b);box-shadow:inset 2px 2px 4px #fff6,inset -5px -6px 10px #000,0 8px 28px #009dff55;transform:perspective(400px) rotateY(-8deg)}
+.brand-mark:before{content:"";position:absolute;inset:7px;border-radius:8px;background:linear-gradient(145deg,#0a1725,#102f4c);box-shadow:inset 0 0 14px #008dff55}
+.brand-mark:after{content:"";position:absolute;left:13px;right:13px;bottom:9px;height:18px;background:repeating-linear-gradient(90deg,#6fcfff 0 5px,transparent 5px 9px);opacity:.9}
+.brand-name{font-size:1.7rem;font-weight:950;letter-spacing:-1.5px;text-shadow:0 3px 15px #000}.brand-name span{color:#27b8ff}.tag{font-size:.68rem;color:#92a9bf;margin-top:1px}
+.navlinks{display:flex;align-items:center;gap:8px}.navlinks a,.nav-btn{padding:10px 13px;color:#c7d4e3;font-size:.86rem;border:1px solid transparent;border-radius:11px;background:none}.navlinks a:hover{border-color:var(--line);background:#ffffff08;color:#fff}
+.nav-btn{cursor:pointer}.login{border-color:#ffffff20!important}.signup{background:linear-gradient(135deg,#19a7ff,#42d9ff)!important;color:#02101a!important;font-weight:850}
+.hero{min-height:650px;display:grid;grid-template-columns:1fr 1.05fr;gap:30px;align-items:center;padding:70px 0 55px}
+.eyebrow{display:inline-block;border:1px solid #35baff33;background:#0aa5ff0d;color:#8bddff;border-radius:999px;padding:8px 13px;font-size:.8rem}
+h1{font-size:clamp(3rem,6vw,5.5rem);line-height:.92;letter-spacing:-4px;margin:20px 0 18px}.gradient{background:linear-gradient(100deg,#fff,#fff 28%,#4ccaff 68%,#178dff);-webkit-background-clip:text;color:transparent}
+.hero p{color:#a7b8ca;line-height:1.75;max-width:570px;font-size:1.04rem}
+.search{display:flex;max-width:600px;margin-top:26px;border:1px solid #7abfff35;background:#071321cc;border-radius:17px;padding:6px;box-shadow:0 18px 50px #0006}
+.search input{flex:1;min-width:0;border:0;outline:0;background:none;color:#fff;padding:13px;font-size:.95rem}.search button,.primary{border:0;border-radius:12px;padding:13px 18px;background:linear-gradient(135deg,#149cff,#48dcff);font-weight:900;color:#02101a;cursor:pointer}
+.stats{display:flex;gap:28px;margin-top:25px;color:#b9c9d8;font-size:.82rem}.stats b{color:#fff}
+.desk{height:455px;position:relative;perspective:1000px}.window{position:absolute;inset:15px 0 45px;border-radius:28px;border:1px solid #bde6ff20;background:linear-gradient(135deg,#10283a88,#07111dcc 60%);overflow:hidden;box-shadow:var(--shadow)}
+.window:before{content:"";position:absolute;inset:0;background:linear-gradient(130deg,transparent 30%,#53cfff10 45%,transparent 62%)}
+.city{position:absolute;bottom:0;left:0;right:0;height:35%;opacity:.55;background:linear-gradient(to top,#0c1a28,transparent),repeating-linear-gradient(90deg,#1b3042 0 28px,transparent 28px 45px);clip-path:polygon(0 50%,6% 35%,11% 60%,17% 30%,23% 65%,30% 40%,36% 55%,43% 25%,50% 58%,58% 35%,64% 65%,72% 30%,79% 56%,87% 37%,94% 58%,100% 25%,100% 100%,0 100%)}
+.desk-surface{position:absolute;left:4%;right:4%;bottom:8px;height:75px;border-radius:18px;background:linear-gradient(100deg,#111c25,#263440,#101820);box-shadow:0 22px 45px #000;transform:rotateX(58deg);transform-origin:bottom}
+.laptop{position:absolute;width:330px;height:205px;right:45px;top:105px;transform:rotateY(-13deg) rotateX(3deg);filter:drop-shadow(0 25px 25px #0009)}
+.screen{height:175px;border:10px solid #111923;border-radius:13px 13px 7px 7px;background:linear-gradient(145deg,#071727,#0a2942);box-shadow:inset 0 0 35px #13aaff30}
+.screen:before{content:"";display:block;width:62%;height:35%;margin:34px auto 0;border:2px solid #2ac6ff55;border-radius:10px;background:linear-gradient(160deg,transparent 45%,#1fbaff18 45%);box-shadow:0 0 25px #17a9ff1a}
+.base{height:25px;background:linear-gradient(#8996a2,#202832 48%,#090e14);clip-path:polygon(7% 0,93% 0,100% 100%,0 100%);border-radius:0 0 12px 12px}
+.phone{position:absolute;left:42px;bottom:64px;width:105px;height:190px;border-radius:17px;background:linear-gradient(145deg,#bbc8d3,#263442 18%,#070c12 22%,#172636);transform:rotate(-15deg) rotateY(14deg);box-shadow:0 25px 45px #000;z-index:3}
+.phone:after{content:"";position:absolute;inset:7px;border-radius:12px;background:radial-gradient(circle at 60% 30%,#24caff55,transparent 30%),#061421;box-shadow:inset 0 0 25px #000}
+.coin-stack{position:absolute;right:355px;bottom:72px;width:58px;height:75px;z-index:4}.coin-stack i{display:block;height:15px;border-radius:50%;border:2px solid #b7c8d4;background:linear-gradient(#e7f0f6,#5f7181 48%,#d4e1e9);box-shadow:0 3px 7px #000;margin-top:-3px}
+.floating-card{position:absolute;left:35px;top:75px;padding:15px 18px;border:1px solid #6fd5ff38;background:#081623dd;backdrop-filter:blur(10px);border-radius:16px;box-shadow:0 20px 50px #0008;transform:rotateY(10deg) rotateX(4deg);z-index:5}.floating-card small{color:#89a4bb}.floating-card strong{display:block;font-size:1.3rem;margin-top:4px}.up{color:#3ce7a0}
+section{padding:70px 0}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:25px}.section-head h2{margin:0;font-size:2rem;letter-spacing:-1px}.section-head p{color:var(--muted);margin:7px 0 0}.view{color:#52caff;font-size:.85rem}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}.card{position:relative;min-height:205px;padding:20px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(145deg,#102030bb,#08111dcc);box-shadow:0 20px 60px #0007;overflow:hidden;transition:.35s;transform-style:preserve-3d}.card:hover{transform:translateY(-7px) rotateX(3deg) rotateY(-3deg);border-color:#3dbfff66}.card:after{content:"";position:absolute;width:150px;height:150px;right:-65px;top:-70px;border-radius:50%;background:#18aaff14;filter:blur(8px)}
+.icon3d{width:64px;height:64px;border-radius:17px;display:grid;place-items:center;font-size:2rem;background:linear-gradient(145deg,#e9f3fb,#526579 35%,#0c1420 37%,#17293b);box-shadow:inset 2px 2px 5px #fff8,inset -5px -7px 12px #000,0 12px 28px #0009;transform:translateZ(25px)}
+.card h3{margin:15px 0 7px}.card p{margin:0;color:#8fa4b9;font-size:.84rem;line-height:1.55}.open{display:inline-block;margin-top:14px;padding:9px 12px;border-radius:10px;background:#ffffff09;border:1px solid #ffffff14;color:#d9f3ff;font-size:.78rem;cursor:pointer}.open:hover{background:#16aaff18}
+.lower{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature{min-height:180px;padding:25px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(145deg,#0d1d2cdd,#07101add);box-shadow:0 22px 60px #0006}.feature h3{margin-top:0}.feature p{color:#91a5b9;line-height:1.65;font-size:.9rem}
+.info{max-width:900px;margin:auto;color:#aab9c9;line-height:1.8}.info h3{color:#fff}
+.auth{position:fixed;inset:0;background:#000b;backdrop-filter:blur(12px);z-index:100;display:none;place-items:center;padding:20px}.modal{width:min(430px,100%);padding:28px;border-radius:24px;border:1px solid #5acaff38;background:linear-gradient(145deg,#0d1d2c,#07101a);box-shadow:0 35px 100px #000}.modal .x{float:right;background:none;border:0;color:#a8bacb;font-size:1.2rem;cursor:pointer}.modal h2{margin-top:0}.modal label{display:block;color:#a9bdce;font-size:.83rem;margin-top:13px}.modal input,.modal textarea{width:100%;margin-top:6px;background:#040b13;border:1px solid #ffffff14;color:#fff;padding:12px;border-radius:11px;outline:0}.modal .primary{width:100%;margin-top:18px}.note{color:#748ba1;font-size:.76rem;line-height:1.5}
+footer{border-top:1px solid var(--line);padding:35px 0;color:#71869b}.foot{display:flex;justify-content:space-between;gap:20px;align-items:center}.foot a{margin-left:16px;color:#a9bdd0;font-size:.82rem}
+@media(max-width:950px){.hero{grid-template-columns:1fr}.desk{max-width:700px;margin:auto}.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.navlinks a{display:none}.brand-name{font-size:1.35rem}.hero{padding-top:45px}h1{letter-spacing:-2px}.stats{gap:13px;flex-wrap:wrap}.cards,.lower{grid-template-columns:1fr}.desk{height:350px}.laptop{width:230px;right:10px;top:100px}.phone{left:12px;bottom:48px;transform:scale(.8) rotate(-15deg)}.coin-stack{right:245px}.floating-card{left:12px;top:35px}.foot{flex-direction:column;text-align:center}.foot a{margin:0 8px}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap"><nav>
+  <a class="brand" href="#">
+    <div class="brand-mark"></div>
+    <div><div class="brand-name">Biz<span>Calc</span></div><div class="tag">Smart Tools for Better Business</div></div>
+  </a>
+  <div class="navlinks">
+    <a href="#">Home</a><a href="#calculators">Calculators</a><a href="#guides">Guides</a><a href="#support">Support</a><a href="#contact">Contact</a>
+    <button class="nav-btn login" onclick="auth('login')">Login</button><button class="nav-btn signup" onclick="auth('signup')">Sign Up</button>
+  </div>
+</nav></div>
+</header>
+
+<main>
+<section class="hero">
+<div class="wrap" style="display:contents">
+<div>
+  <span class="eyebrow">FREE BUSINESS TOOLS • FAST • MOBILE FRIENDLY</span>
+  <h1>Smarter Calculations.<br><span class="gradient">Bigger Opportunities.</span></h1>
+  <p>Free business calculators, practical guides and useful tools to help you understand costs, prices, profit and everyday business numbers.</p>
+  <div class="search"><input id="search" placeholder="Search a calculator... e.g. burger profit, delivery, budget"><button onclick="searchTools()">Search</button></div>
+  <div class="stats"><span>⚡ <b>100% Free</b></span><span>◈ <b>Easy to Use</b></span><span>▣ <b>Mobile Friendly</b></span></div>
+</div>
+<div class="desk" aria-label="Realistic 3D business workspace">
+  <div class="window"><div class="city"></div></div>
+  <div class="floating-card"><small>Estimated monthly profit</small><strong>PKR 185,000</strong><span class="up">↗ +18.4%</span></div>
+  <div class="laptop"><div class="screen"></div><div class="base"></div></div>
+  <div class="phone"></div><div class="coin-stack"><i></i><i></i><i></i><i></i><i></i></div><div class="desk-surface"></div>
+</div>
+</div>
+</section>
+
+<section id="calculators">
+<div class="wrap">
+<div class="section-head"><div><h2>Popular Calculators</h2><p>Quick tools for business and personal finance.</p></div><a class="view" href="#calculators">View All →</a></div>
+<div class="cards" id="cards">
+  <article class="card" data-key="burger profit food"><div class="icon3d">🍔</div><h3>Burger Profit</h3><p>Calculate cost, profit and margin for one burger.</p><span class="open" onclick="openCalc('burger')">Open Calculator →</span></article>
+  <article class="card" data-key="food cost restaurant"><div class="icon3d">🍟</div><h3>Food Cost</h3><p>Find your food cost percentage from selling price.</p><span class="open" onclick="openCalc('food')">Open Calculator →</span></article>
+  <article class="card" data-key="profit margin business"><div class="icon3d">💰</div><h3>Profit Margin</h3><p>Calculate profit and margin from cost and price.</p><span class="open" onclick="openCalc('margin')">Open Calculator →</span></article>
+  <article class="card" data-key="delivery rider bike"><div class="icon3d">🛵</div><h3>Delivery Profit</h3><p>Estimate daily rider income after fuel and expenses.</p><span class="open" onclick="openCalc('delivery')">Open Calculator →</span></article>
+  <article class="card" data-key="break even business"><div class="icon3d">📊</div><h3>Break-Even</h3><p>Estimate units needed to cover fixed costs.</p><span class="open" onclick="openCalc('break')">Open Calculator →</span></article>
+  <article class="card" data-key="shop profit store"><div class="icon3d">🏪</div><h3>Shop Profit</h3><p>Estimate monthly revenue, expenses and profit.</p><span class="open" onclick="openCalc('shop')">Open Calculator →</span></article>
+  <article class="card" data-key="monthly budget salary"><div class="icon3d">💵</div><h3>Monthly Budget</h3><p>See how much remains after monthly expenses.</p><span class="open" onclick="openCalc('budget')">Open Calculator →</span></article>
+  <article class="card" data-key="savings target"><div class="icon3d">🎯</div><h3>Savings Target</h3><p>Calculate the monthly saving needed for a target.</p><span class="open" onclick="openCalc('saving')">Open Calculator →</span></article>
+</div>
+</div>
+</section>
+
+<section id="guides"><div class="wrap">
+<div class="section-head"><div><h2>Business Guides</h2><p>Practical information for starting and running a small business.</p></div></div>
+<div class="lower">
+<div class="feature"><h3>How to calculate a selling price</h3><p>Start with your complete unit cost, including product cost, packaging and other direct expenses. Add your desired profit and compare the result with your market.</p></div>
+<div class="feature"><h3>Why profit margin matters</h3><p>Revenue alone does not show whether a product is profitable. Track cost, gross profit and margin to understand the economics of each product.</p></div>
+<div class="feature"><h3>Business calculations</h3><p>Replace sample values with your own current costs. BizCalc provides estimates for educational and planning purposes.</p></div>
+</div></div></section>
+
+<section id="support"><div class="wrap">
+<div class="section-head"><div><h2>Support Center</h2><p>Need help with a calculator or found a problem?</p></div></div>
+<div class="lower">
+<div class="feature"><h3>💬 Calculator Help</h3><p>Tell us which calculator is giving you trouble and what result you expected.</p><button class="primary" onclick="auth('contact')">Get Support</button></div>
+<div class="feature"><h3>🐞 Report a Problem</h3><p>Found a bug, wrong calculation or broken page? Send the details to the site team.</p><button class="primary" onclick="auth('contact')">Report Issue</button></div>
+<div class="feature"><h3>🔒 Account Help</h3><p>Need help with your account interface? Use the contact form and include your email.</p><button class="primary" onclick="auth('contact')">Contact Support</button></div>
+</div></div></section>
+
+<section id="contact"><div class="wrap">
+<div class="section-head"><div><h2>Contact Us</h2><p>Questions, suggestions and business-tool feedback.</p></div></div>
+<div class="info"><p>Use the contact form to send a message. This GitHub-only version contains the front-end form; connect a real email service or backend before launch if you want messages delivered automatically.</p><button class="primary" onclick="auth('contact')">Open Contact Form</button></div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><div class="foot">
+<div><strong style="color:#eaf5ff;font-size:1.1rem">BizCalc</strong><div style="font-size:.75rem;margin-top:5px">Smart Tools for Better Business</div></div>
+<div><a href="#guides">About</a><a href="#contact">Privacy Policy</a><a href="#contact">Disclaimer</a><a href="#contact">Contact</a></div>
+<div>© <span id="year"></span> BizCalc</div>
+</div></div></footer>
+
+<div class="auth" id="auth"><div class="modal" onclick="event.stopPropagation()"><button class="x" onclick="closeAuth()">✕</button><div id="authContent"></div></div></div>
+<div class="auth" id="calcModal"><div class="modal" onclick="event.stopPropagation()"><button class="x" onclick="closeCalc()">✕</button><div id="calcContent"></div></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const money=x=>'PKR '+Math.round(x).toLocaleString('en-PK');
+function auth(type){
+ $('auth').style.display='grid';
+ let title='',body='';
+ if(type==='signup') body=`<h2>Create Account</h2><p class="note">Front-end demo. Real authentication needs a secure backend/database.</p><label>Name<input id="an" placeholder="Your name"></label><label>Email<input id="ae" type="email" placeholder="you@example.com"></label><label>Password<input id="ap" type="password" placeholder="Create password"></label><button class="primary" onclick="demo('Account form submitted')">Create Account</button>`;
+ else if(type==='login') body=`<h2>Welcome Back</h2><p class="note">Front-end demo. No password is stored by this HTML page.</p><label>Email<input id="le" type="email" placeholder="you@example.com"></label><label>Password<input id="lp" type="password" placeholder="Password"></label><button class="primary" onclick="demo('Login demo clicked')">Login</button><p class="note" style="text-align:center">Need an account? <a href="#" onclick="auth('signup');return false" style="color:#55caff">Sign up</a></p>`;
+ else body=`<h2>Contact Support</h2><p class="note">This form is ready for a backend/email connection.</p><label>Name<input id="cn" placeholder="Your name"></label><label>Email<input id="ce" type="email" placeholder="you@example.com"></label><label>Message<textarea id="cm" rows="5" placeholder="How can we help?"></textarea></label><button class="primary" onclick="demo('Message form submitted')">Send Message</button>`;
+ $('authContent').innerHTML=body;
+}
+function closeAuth(){$('auth').style.display='none'}$('auth').onclick=e=>{if(e.target===$('auth'))closeAuth()}
+function demo(msg){alert(msg+'. Connect a backend/email service for real functionality.');closeAuth()}
+function searchTools(){let q=$('search').value.toLowerCase().trim();document.querySelectorAll('.card').forEach(c=>c.style.display=!q||c.dataset.key.includes(q)?'':'none');$('calculators').scrollIntoView({behavior:'smooth'})}
+$('search').addEventListener('keydown',e=>{if(e.key==='Enter')searchTools()});
+
+const calcs={
+ burger:{title:'Burger Profit Calculator',fields:[['c1','Chicken / patty cost','80'],['c2','Bun cost','35'],['c3','Sauce cost','15'],['c4','Vegetables','20'],['c5','Cheese / extras','30'],['c6','Packaging','15'],['c7','Other cost','10'],['c8','Selling price','300']],calc:()=>{let c=[1,2,3,4,5,6,7].reduce((a,i)=>a+num('c'+i),0),s=num('c8'),p=s-c;return `Total cost: <b>${money(c)}</b><br>Profit: <b>${money(p)}</b><br>Profit margin: <b>${(p/s*100).toFixed(1)}%</b>`}},
+ food:{title:'Food Cost Calculator',fields:[['f1','Food cost per item (PKR)','120'],['f2','Selling price (PKR)','350']],calc:()=>{let c=num('f1'),s=num('f2');return `Food cost: <b>${money(c)}</b><br>Food cost percentage: <b>${(c/s*100).toFixed(1)}%</b><br>Gross amount: <b>${money(s-c)}</b>`}},
+ margin:{title:'Profit Margin Calculator',fields:[['m1','Cost price (PKR)','200'],['m2','Selling price (PKR)','300']],calc:()=>{let c=num('m1'),s=num('m2'),p=s-c;return `Profit: <b>${money(p)}</b><br>Profit margin: <b>${(p/s*100).toFixed(1)}%</b><br>Markup: <b>${(p/c*100).toFixed(1)}%</b>`}},
+ delivery:{title:'Delivery Profit Calculator',fields:[['d1','Deliveries per day','15'],['d2','Average earning per delivery (PKR)','180'],['d3','Fuel per day (PKR)','450'],['d4','Other daily expenses (PKR)','100']],calc:()=>{let r=num('d1')*num('d2'),n=r-num('d3')-num('d4');return `Daily gross: <b>${money(r)}</b><br>Daily net estimate: <b>${money(n)}</b><br>30-day estimate: <b>${money(n*30)}</b>`}},
+ break:{title:'Break-Even Calculator',fields:[['b1','Fixed monthly costs (PKR)','50000'],['b2','Selling price per unit (PKR)','300'],['b3','Variable cost per unit (PKR)','180']],calc:()=>{let f=num('b1'),s=num('b2'),v=num('b3'),con=s-v,u=con>0?f/con:0;return `Contribution per unit: <b>${money(con)}</b><br>Break-even units: <b>${u.toFixed(1)}</b><br>Break-even sales: <b>${money(u*s)}</b>`}},
+ shop:{title:'Shop Profit Calculator',fields:[['s1','Monthly sales (PKR)','300000'],['s2','Stock/product cost (PKR)','170000'],['s3','Rent (PKR)','25000'],['s4','Other expenses (PKR)','20000']],calc:()=>{let sales=num('s1'),p=sales-num('s2')-num('s3')-num('s4');return `Estimated monthly profit: <b>${money(p)}</b><br>Profit margin: <b>${(p/sales*100).toFixed(1)}%</b>`}},
+ budget:{title:'Monthly Budget Calculator',fields:[['u1','Monthly income (PKR)','60000'],['u2','Food & household (PKR)','20000'],['u3','Transport (PKR)','8000'],['u4','Bills (PKR)','7000'],['u5','Other expenses (PKR)','5000']],calc:()=>{let i=num('u1'),e=['u2','u3','u4','u5'].reduce((a,k)=>a+num(k),0),r=i-e;return `Total expenses: <b>${money(e)}</b><br>Estimated remaining: <b>${money(r)}</b><br>Potential saving rate: <b>${(r/i*100).toFixed(1)}%</b>`}},
+ saving:{title:'Savings Target Calculator',fields:[['t1','Target amount (PKR)','1500000'],['t2','Already saved (PKR)','100000'],['t3','Months available','24']],calc:()=>{let r=Math.max(0,num('t1')-num('t2')),m=num('t3')>0?r/num('t3'):0;return `Remaining target: <b>${money(r)}</b><br>Required monthly saving: <b>${money(m)}</b>`}}
+};
+function num(id){return Number($(id).value)||0}
+function openCalc(k){let c=calcs[k];$('calcModal').style.display='grid';$('calcContent').innerHTML='<h2>'+c.title+'</h2><div class="note">Enter your figures and calculate an estimate.</div>'+c.fields.map(x=>`<label>${x[1]}<input id="${x[0]}" type="number" min="0" value="${x[2]}"></label>`).join('')+'<button class="primary" onclick="runCalc(\''+k+'\')">Calculate</button><div id="calcResult" style="margin-top:16px;padding:15px;border:1px solid #39bfff33;border-radius:13px;background:#0aaaff0c;line-height:1.8">Your result will appear here.</div>'}
+function runCalc(k){$('calcResult').innerHTML=calcs[k].calc()}
+function closeCalc(){$('calcModal').style.display='none'}$('calcModal').onclick=e=>{if(e.target===$('calcModal'))closeCalc()}
+$('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
